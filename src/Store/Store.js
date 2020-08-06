@@ -1,4 +1,3 @@
-import { createStoreHook } from 'react-redux';
 import { createStore } from 'redux';
 
 const INITIAL_STATE = {
@@ -20,5 +19,4 @@ function books(state = INITIAL_STATE, action) {
 
 
 const store = createStore(books);
-
 export default store;

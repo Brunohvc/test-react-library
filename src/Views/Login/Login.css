@@ -1,0 +1,17 @@
+body {
+    background-color: #bfe1ff !important;
+}
+
+.modal-content {
+    background-color: transparent !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, .2) !important;
+}
+
+.container-fluid {
+    align-items: center;
+    display    : flex;
+    height     : 100vh;
+}
