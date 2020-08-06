@@ -1,17 +1,15 @@
 import { createStore } from 'redux';
 
 const INITIAL_STATE = {
-    data: [
-        'Livro 1',
-        'Livro 2',
-        'Livro 3',
-    ]
+    data: []
 };
 
 function books(state = INITIAL_STATE, action) {
     switch (action.type) {
         case 'ADD':
             return { ...state, data: [...state.data, action.title] }
+        case 'CLEAN':
+            return { ...state, data: [] }
         default:
             return state;
     }
@@ -19,4 +17,5 @@ function books(state = INITIAL_STATE, action) {
 
 
 const store = createStore(books);
+
 export default store;
