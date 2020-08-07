@@ -12,11 +12,8 @@ const BooksList = () => {
 
     const getBooks = () => {
         Books.get().then(res => {
-            console.log('dentro', res)
-
             dispatch({ type: 'CLEAN' })
             res.forEach(book => {
-                console.log('book', book)
                 dispatch({ type: 'ADD', title: book.name })
             });
         });

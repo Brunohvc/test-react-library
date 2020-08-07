@@ -7,9 +7,7 @@ class Books {
             db.collection("books")
                 .get()
                 .then(res => {
-                    console.log(res)
                     const data = res.docs.map(doc => doc.data());
-                    console.log(data);
                     resolve(data);
                 })
                 .catch(error => {
@@ -23,7 +21,6 @@ class Books {
             db.collection("books")
                 .add(values)
                 .then(res => {
-                    console.log(res)
                     resolve(res);
                 })
                 .catch(error => {

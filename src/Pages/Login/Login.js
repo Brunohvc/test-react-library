@@ -13,7 +13,6 @@ const Login = () => {
     }, []);
 
     const responseGoogle = (res) => {
-
         const userData = {
             Name: res.profileObj.name,
             email: res.profileObj.email,
