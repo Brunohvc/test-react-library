@@ -1,10 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const INITIAL_STATE = {
+const INITIAL_STATE_BOOKS = {
     data: []
 };
 
-function books(state = INITIAL_STATE, action) {
+const INITIAL_STATE_USER = {
+    data: null
+};
+
+function books(state = INITIAL_STATE_BOOKS, action) {
     switch (action.type) {
         case 'ADD':
             return { ...state, data: [...state.data, action.title] }
@@ -15,7 +19,22 @@ function books(state = INITIAL_STATE, action) {
     }
 }
 
+function singIn(state = INITIAL_STATE_USER, action) {
+    switch (action.type) {
+        case 'LOGIN':
+            localStorage.setItem("userData", JSON.stringify(action.userData));
+            return { ...state, data: action.userData }
+        case 'LOGOUT':
+            localStorage.removeItem("userData");
+            return { ...state, data: null }
+        case 'GETUSER':
+            return state.data;
+        default:
+            return state;
+    }
+}
 
-const store = createStore(books);
+
+const store = createStore(combineReducers({ books, singIn }));
 
 export default store;

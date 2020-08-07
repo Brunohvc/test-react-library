@@ -7,8 +7,8 @@ import Login from '../Pages/Login';
 const Routes = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/login" component={() => <Login />} />
-            <PrivateRouter exact path="/" component={() => <BooksList />} />
+            <Route exact path="/login" component={Login} />
+            <PrivateRouter exact path="/" component={BooksList} />
         </Switch>
     </BrowserRouter>
 )

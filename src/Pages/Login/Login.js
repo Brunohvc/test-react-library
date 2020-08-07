@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import GoogleLogin from 'react-google-login';
 import './Login.css';
-import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
-
-    const [user, userState] = useState(false);
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         verifyAuth();
@@ -13,21 +14,23 @@ const Login = () => {
 
     const responseGoogle = (res) => {
 
-        const googleResponse = {
+        const userData = {
             Name: res.profileObj.name,
             email: res.profileObj.email,
             token: res.googleId,
             Image: res.profileObj.imageUrl,
             ProviderId: 'Google'
         };
-        localStorage.setItem("userData", JSON.stringify(googleResponse));
-        verifyAuth();
+        dispatch({ type: 'LOGIN', userData });
+        history.push('/');
     }
 
     const verifyAuth = () => {
-        const user = JSON.parse(localStorage.getItem("userData"));
-        const existUser = user != null;
-        userState(existUser);
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (userData != null) {
+            dispatch({ type: 'LOGIN', userData });
+            history.push('/');
+        }
     }
 
     return (
@@ -46,7 +49,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            {user && <Redirect to={{ pathname: '/' }} />}
         </div >
     );
 };

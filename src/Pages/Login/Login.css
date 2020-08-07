@@ -7,7 +7,9 @@
 }
 
 .login-container {
-    align-items: center;
-    display    : flex;
-    height     : 100vh;
+    -ms-flex-align: center;
+    align-items   : center;
+    display       : -ms-flexbox;
+    display       : flex;
+    height        : 100vh;
 }

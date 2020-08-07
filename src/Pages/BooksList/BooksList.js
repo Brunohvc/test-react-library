@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
 import Books from '../../Services/Books';
 
 const BooksList = () => {
-    const books = useSelector(state => { return state.data });
-    const [logOut, setlogOut] = useState(false);
+    const books = useSelector(state => { return state.books.data });
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,19 +28,17 @@ const BooksList = () => {
         getBooks();
     }
 
-    const clickLogOut = () => {
-        localStorage.removeItem("userData");
-        setlogOut(true);
-    }
-
     return (
         <div className="container-fluid">
-            <button className="btn btn-primary" type="button" onClick={clickLogOut}>LogOut</button>
             <ul>
+                {books.map((book, index) => <li key={index}>{book}</li>)}
+                {books.map((book, index) => <li key={index}>{book}</li>)}
+                {books.map((book, index) => <li key={index}>{book}</li>)}
+                {books.map((book, index) => <li key={index}>{book}</li>)}
+                {books.map((book, index) => <li key={index}>{book}</li>)}
                 {books.map((book, index) => <li key={index}>{book}</li>)}
             </ul>
             <button className="btn btn-primary" type="button" onClick={addBook}>Add Book</button>
-            {logOut && <Redirect to={{ pathname: '/login' }} />}
         </div>
     );
 }

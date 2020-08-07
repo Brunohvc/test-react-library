@@ -5,11 +5,13 @@ import Footer from '../Footer';
 
 const DefaultPage = ({ component: Component, ...rest }) => {
     return (
-        <div className="container-fluid">
+        <div className="default-container">
             <Header />
-            <Component {...rest} />
+            <div className="container-fluid">
+                <Component {...rest} />
+            </div >
             <Footer />
-        </div >
+        </div>
     );
 };
 
