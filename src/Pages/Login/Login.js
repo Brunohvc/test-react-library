@@ -31,10 +31,10 @@ const Login = () => {
     }
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid login-container">
             <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
+                <div className="modal-content login-content">
+                    <div className="modal-header login-header">
                         <h5 className="modal-title">Login</h5>
                     </div>
                     <div className="modal-body">

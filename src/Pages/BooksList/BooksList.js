@@ -36,7 +36,7 @@ const BooksList = () => {
     }
 
     return (
-        <div>
+        <div className="container-fluid">
             <button className="btn btn-primary" type="button" onClick={clickLogOut}>LogOut</button>
             <ul>
                 {books.map((book, index) => <li key={index}>{book}</li>)}
