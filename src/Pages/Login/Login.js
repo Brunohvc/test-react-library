@@ -16,7 +16,7 @@ const Login = () => {
         const userData = {
             Name: res.profileObj.name,
             email: res.profileObj.email,
-            token: res.googleId,
+            googleId: res.googleId,
             Image: res.profileObj.imageUrl,
             ProviderId: 'Google'
         };

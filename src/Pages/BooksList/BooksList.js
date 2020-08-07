@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import Books from '../../Services/Books';
+import BookItem from './BookItem';
 
 const BooksList = () => {
-    const books = useSelector(state => { return state.books.data });
     const dispatch = useDispatch();
+    const books = useSelector(state => { return state.books.data });
+    const user = JSON.parse(localStorage.getItem("userData"));
 
     useEffect(() => {
         getBooks();
@@ -14,28 +16,14 @@ const BooksList = () => {
         Books.get().then(res => {
             dispatch({ type: 'CLEAN' })
             res.forEach(book => {
-                dispatch({ type: 'ADD', title: book.name })
+                dispatch({ type: 'ADD', ...book })
             });
         });
     }
 
-    const addBook = () => {
-        //dispatch({ type: 'ADD', title: 'JS' })
-        Books.post({ name: 'Book Name' });
-        getBooks();
-    }
-
     return (
-        <div className="container-fluid">
-            <ul>
-                {books.map((book, index) => <li key={index}>{book}</li>)}
-                {books.map((book, index) => <li key={index}>{book}</li>)}
-                {books.map((book, index) => <li key={index}>{book}</li>)}
-                {books.map((book, index) => <li key={index}>{book}</li>)}
-                {books.map((book, index) => <li key={index}>{book}</li>)}
-                {books.map((book, index) => <li key={index}>{book}</li>)}
-            </ul>
-            <button className="btn btn-primary" type="button" onClick={addBook}>Add Book</button>
+        <div className="container-book-list">
+            {books.map((book, index) => <BookItem key={index} book={book} user={user} atualizar={getBooks} />)}
         </div>
     );
 }

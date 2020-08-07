@@ -11,7 +11,8 @@ const INITIAL_STATE_USER = {
 function books(state = INITIAL_STATE_BOOKS, action) {
     switch (action.type) {
         case 'ADD':
-            return { ...state, data: [...state.data, action.title] }
+            delete action.type;
+            return { ...state, data: [...state.data, action] }
         case 'CLEAN':
             return { ...state, data: [] }
         default:
@@ -27,8 +28,6 @@ function singIn(state = INITIAL_STATE_USER, action) {
         case 'LOGOUT':
             localStorage.removeItem("userData");
             return { ...state, data: null }
-        case 'GETUSER':
-            return state.data;
         default:
             return state;
     }

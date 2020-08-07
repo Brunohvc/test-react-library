@@ -4,8 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const Header = () => {
+    const user = JSON.parse(localStorage.getItem("userData"));
     const history = useHistory();
     const dispatch = useDispatch();
+
+    console.log(user)
 
     const clickLogOut = () => {
         dispatch({ type: 'LOGOUT' });
@@ -43,6 +46,8 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="form-inline my-2 my-lg-0">
+                    {user.Image && <img src={user.Image} width="30" height="30" className="d-inline-block align-top space-r-10 user-img-header" alt="" loading="lazy" />}
+                    <span className="space-r-10 user-name">{user.Name}</span>
                     <button className="btn btn-success my-2 my-sm-0" onClick={clickLogOut}>LogOut</button>
                 </div>
             </div>
