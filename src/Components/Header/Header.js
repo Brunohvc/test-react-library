@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const Header = () => {
     const user = JSON.parse(localStorage.getItem("userData"));
+    const [mobileMenu, setMobileMenu] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -15,14 +16,27 @@ const Header = () => {
         history.push('/login');
     }
 
+    const showMobileMenu = () => {
+        setMobileMenu(!mobileMenu);
+    }
+
+    const getClassColapseMenu = () => {
+        let menuClass = 'collapse navbar-collapse';
+        if (mobileMenu) {
+            menuClass += ' show'
+        }
+        return menuClass;
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="#">Navbar</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button onClick={showMobileMenu} className="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className={getClassColapseMenu()} id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
                         <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
@@ -47,13 +61,12 @@ const Header = () => {
                 </ul>
                 <div className="form-inline my-2 my-lg-0">
                     {user.Image && <img src={user.Image} width="30" height="30" className="d-inline-block align-top space-r-10 user-img-header" alt="" loading="lazy" />}
-                    <span className="space-r-10 user-name">{user.Name}</span>
+                    <span className="navbar-text space-r-10 user-name">{user.Name}</span>
                     <button className="btn btn-success my-2 my-sm-0" onClick={clickLogOut}>LogOut</button>
                 </div>
             </div>
         </nav>
     );
 };
-
 
 export default Header;
